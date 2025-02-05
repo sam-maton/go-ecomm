@@ -2,13 +2,15 @@ package main
 
 import (
 	"flag"
+	"html/template"
 	"log/slog"
 	"net/http"
 	"os"
 )
 
 type application struct {
-	logger *slog.Logger
+	logger        *slog.Logger
+	templateCache map[string]*template.Template
 }
 
 func main() {
@@ -20,8 +22,15 @@ func main() {
 		AddSource: false,
 	}))
 
+	cache, err := newTemplateCache()
+	if err != nil {
+		logger.Error(err.Error())
+		os.Exit(1)
+	}
+
 	app := application{
-		logger: logger,
+		logger:        logger,
+		templateCache: cache,
 	}
 
 	server := http.Server{
@@ -32,7 +41,7 @@ func main() {
 
 	logger.Info("starting server on http://localhost" + *addr)
 
-	err := server.ListenAndServe()
+	err = server.ListenAndServe()
 	logger.Error(err.Error())
 	os.Exit(1)
 }

@@ -1,26 +1,31 @@
-body, p{
+body,
+p {
   margin: 0;
-  font-family: "Lato", serif;
+  font-family: 'Lato', serif;
 }
 
-main{
+[x-cloak] {
+  display: none !important;
+}
+
+main {
   height: 100rem;
   padding: 0 3rem;
 }
 
-ul{
+ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-a{
+a {
   text-decoration: none;
   color: currentColor;
   display: block;
 }
 
-.announcement-bar{
+.announcement-bar {
   background-color: #006151;
   color: white;
   height: 44px;
@@ -28,42 +33,42 @@ a{
   align-content: center;
 }
 
-header{
+header {
   display: flex;
   position: relative;
-  border-bottom: .1rem solid #e8e9ef;
+  border-bottom: 0.1rem solid #e8e9ef;
   padding: 0rem 3rem;
   position: sticky;
   top: 0;
   background-color: white;
 }
 
-.header__title{
+.header__title {
   flex: 1;
 }
-.header__menu{
+.header__menu {
   flex: 3;
   display: flex;
   justify-content: center;
   font-size: 16px;
 
-  ul{
+  ul {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
 
-    li{
+    li {
       padding: 0 0.6rem;
       height: 100%;
       align-content: center;
     }
   }
 }
-.header__icons{
+.header__icons {
   flex: 1;
 }
 
-.header__sub-menu{
+.header__sub-menu {
   position: absolute;
   background-color: rgb(213, 122, 122);
   width: 100%;
