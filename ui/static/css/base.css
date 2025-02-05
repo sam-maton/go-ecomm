@@ -1,0 +1,44 @@
+body, p{
+  margin: 0;
+  font-family: "Lato", serif;
+}
+
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+a{
+  text-decoration: none;
+  color: currentColor;
+  display: block;
+}
+
+.announcement-bar{
+  background-color: #006151;
+  color: white;
+  height: 44px;
+  text-align: center;
+  align-content: center;
+}
+
+header{
+  display: flex;
+}
+
+.header__title{
+  flex: 1;
+}
+.header__menu{
+  flex: 3;
+  display: flex;
+  justify-content: center;
+
+  ul{
+    display: flex;
+    flex-wrap: nowrap;
+  }
+}
+.header__icons{
+  flex: 1;
+}
