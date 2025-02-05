@@ -9,13 +9,13 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) mens(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Mens Collection"))
+	app.render(w, http.StatusOK, "mens.html")
 }
 
 func (app *application) womens(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Womens Collection"))
+	app.render(w, http.StatusOK, "womens.html")
 }
 
 func (app *application) packsAndGear(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Packs & Gear Collection"))
+	app.render(w, http.StatusOK, "packs-gear.html")
 }
