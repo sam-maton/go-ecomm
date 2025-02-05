@@ -6,42 +6,42 @@
 </h2>
 <nav class="header__menu">
   <ul>
-    <li>
-      <details class="header__menu_details">
-        <summary><a class="header__menu_link" href="/collections/women">Women</a></summary>
-        <div>
+    <li class="header__menu-item">
+      <details class="header__menu-details">
+        <summary><a class="header__menu-link" href="/collections/women">Women</a></summary>
+        <div class="header__sub-menu">
           <h3>Womens Menu Items</h3>
         </div>
       </details>
     </li>
-    <li>
-      <details class="header__menu_details">
-        <summary><a class="header__menu_link" href="/collections/men">Men</a></summary>
-        <div>
+    <li class="header__menu-item">
+      <details class="header__menu-details">
+        <summary><a class="header__menu-link" href="/collections/men">Men</a></summary>
+        <div class="header__sub-menu">
           <h3>Mens Menu Items</h3>
         </div>
       </details>
     </li>
-    <li>
-      <details class="header__menu_details">
-        <summary><a class="header__menu_link" href="/collections/packs-gear">Packs & Gear</a></summary>
-        <div>
+    <li class="header__menu-item">
+      <details class="header__menu-details">
+        <summary><a class="header__menu-link" href="/collections/packs-gear">Packs & Gear</a></summary>
+        <div class="header__sub-menu">
           <h3>Packs & Gear Menu Items</h3>
         </div>
       </details>
     </li>
-    <li>
-      <details class="header__menu_details">
-        <summary><a class="header__menu_link" href="/blog/our-story">Our Story</a></summary>
-        <div>
+    <li class="header__menu-item">
+      <details class="header__menu-details">
+        <summary><a class="header__menu-link" href="/blog/our-story">Our Story</a></summary>
+        <div class="header__sub-menu">
           <h3>Our Story Menu Items</h3>
         </div>
       </details>
     </li>
-    <li>
-      <details class="header__menu_details">
-        <summary><a class="header__menu_link" href="/collections/outlet">Outlet</a></summary>
-        <div>
+    <li class="header__menu-item">
+      <details class="header__menu-details">
+        <summary><a class="header__menu-link" href="/collections/outlet">Outlet</a></summary>
+        <div class="header__sub-menu">
           <h3>Outlet Menu Items</h3>
         </div>
       </details>
@@ -52,14 +52,16 @@
 
 </div>
 <script>
-  const detailsElements = document.querySelectorAll('.header__menu_details');
+  const itemsElements = document.querySelectorAll('.header__menu-item');
 
-  detailsElements.forEach(details => {
-    details.addEventListener('mouseover', () => {
+  itemsElements.forEach(item => {
+    item.addEventListener('mouseover', () => {
+      const details = item.children[0];
       details.open = true;
     });
 
-    details.addEventListener('mouseout', () => {
+    item.addEventListener('mouseout', () => {
+      const details = item.children[0];
       details.open = false;
     });
   });
