@@ -1,23 +1,30 @@
-{{define "base"}}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ecomm - {{template "title" .}}</title>
-  <link rel="stylesheet" href="/static/css/base.css">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="announcement-bar">
-    <p>Free delivery on £75+ orders</p>
-  </div>
-  <header>
-    {{template "navbar" .}}
-  </header>
-  <main>
-    {{template "content" .}}
-  </main>
-</body>
-</html>
-{{end}}
+{{ define "base" }}
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Ecomm - {{ template "title" . }}</title>
+      <link rel="stylesheet" href="/static/css/base.css" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet"
+      />
+      <script
+        defer
+        src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      ></script>
+    </head>
+    <body>
+      <div class="announcement-bar">
+        <p>Free delivery on £75+ orders</p>
+      </div>
+      <header>
+        {{ template "navbar" . }}
+      </header>
+      <main>
+        {{ template "content" . }}
+      </main>
+    </body>
+  </html>
+{{ end }}

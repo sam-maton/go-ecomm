@@ -1,69 +1,67 @@
-{{define "navbar"}}
-<h2 class="header__title">
-  <a href="/">
-    PASSENGER
-  </a>
-</h2>
-<nav class="header__menu">
-  <ul>
-    <li class="header__menu-item">
-      <details class="header__menu-details">
-        <summary><a class="header__menu-link" href="/collections/women">Women</a></summary>
-        <div class="header__sub-menu">
+{{ define "navbar" }}
+  <h2 class="header__title">
+    <a href="/"> PASSENGER </a>
+  </h2>
+  <nav class="header__menu">
+    <ul>
+      <li
+        x-data="{open: false}"
+        @mouseover="open = true"
+        @mouseout="open = false"
+        class="header__menu-item"
+      >
+        <a class="header__menu-link" href="/collections/women">Women</a>
+        <div x-show="open" class="header__sub-menu">
           <h3>Womens Menu Items</h3>
         </div>
-      </details>
-    </li>
-    <li class="header__menu-item">
-      <details class="header__menu-details">
-        <summary><a class="header__menu-link" href="/collections/men">Men</a></summary>
-        <div class="header__sub-menu">
+      </li>
+      <li
+        x-data="{open: false}"
+        @mouseover="open = true"
+        @mouseout="open = false"
+        class="header__menu-item"
+      >
+        <a class="header__menu-link" href="/collections/men">Men</a>
+        <div x-show="open" class="header__sub-menu">
           <h3>Mens Menu Items</h3>
         </div>
-      </details>
-    </li>
-    <li class="header__menu-item">
-      <details class="header__menu-details">
-        <summary><a class="header__menu-link" href="/collections/packs-gear">Packs & Gear</a></summary>
-        <div class="header__sub-menu">
+      </li>
+      <li
+        x-data="{open: false}"
+        @mouseover="open = true"
+        @mouseout="open = false"
+        class="header__menu-item"
+      >
+        <a class="header__menu-link" href="/collections/packs-gear"
+          >Packs & Gear</a
+        >
+        <div x-show="open" class="header__sub-menu">
           <h3>Packs & Gear Menu Items</h3>
         </div>
-      </details>
-    </li>
-    <li class="header__menu-item">
-      <details class="header__menu-details">
-        <summary><a class="header__menu-link" href="/blog/our-story">Our Story</a></summary>
-        <div class="header__sub-menu">
+      </li>
+      <li
+        x-data="{open: false}"
+        @mouseover="open = true"
+        @mouseout="open = false"
+        class="header__menu-item"
+      >
+        <a class="header__menu-link" href="/blog/our-story">Our Story</a>
+        <div x-show="open" class="header__sub-menu">
           <h3>Our Story Menu Items</h3>
         </div>
-      </details>
-    </li>
-    <li class="header__menu-item">
-      <details class="header__menu-details">
-        <summary><a class="header__menu-link" href="/collections/outlet">Outlet</a></summary>
-        <div class="header__sub-menu">
+      </li>
+      <li
+        x-data="{open: false}"
+        @mouseover="open = true"
+        @mouseout="open = false"
+        class="header__menu-item"
+      >
+        <a class="header__menu-link" href="/collections/outlet">Outlet</a>
+        <div x-show="open" class="header__sub-menu">
           <h3>Outlet Menu Items</h3>
         </div>
-      </details>
-    </li>
-  </ul>
-</nav>
-<div class="header__icons">
-
-</div>
-<script>
-  const itemsElements = document.querySelectorAll('.header__menu-item');
-
-  itemsElements.forEach(item => {
-    item.addEventListener('mouseover', () => {
-      const details = item.children[0];
-      details.open = true;
-    });
-
-    item.addEventListener('mouseout', () => {
-      const details = item.children[0];
-      details.open = false;
-    });
-  });
-</script>
-{{end}}
+      </li>
+    </ul>
+  </nav>
+  <div class="header__icons"></div>
+{{ end }}

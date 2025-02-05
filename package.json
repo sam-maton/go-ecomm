@@ -1,0 +1,24 @@
+{
+  "name": "go-ecomm",
+  "version": "1.0.0",
+  "description": "A GO ecommerce clothing store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sam-maton/go-ecomm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sam-maton/go-ecomm/issues"
+  },
+  "homepage": "https://github.com/sam-maton/go-ecomm#readme",
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "prettier-plugin-go-template": "^0.0.15"
+  }
+}
