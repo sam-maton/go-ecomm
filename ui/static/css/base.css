@@ -3,6 +3,10 @@ body, p{
   font-family: "Lato", serif;
 }
 
+main{
+  height: 100rem;
+}
+
 ul{
   list-style-type: none;
   padding: 0;
@@ -24,6 +28,18 @@ a{
 
 header{
   display: flex;
+  border-bottom: .1rem solid #e8e9ef;
+  padding: 0rem 3rem;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
 }
 
 .header__title{
@@ -33,10 +49,13 @@ header{
   flex: 3;
   display: flex;
   justify-content: center;
+  font-size: 16px;
 
   ul{
     display: flex;
     flex-wrap: nowrap;
+    gap: 1.2rem;
+    align-items: center;
   }
 }
 .header__icons{

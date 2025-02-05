@@ -15,3 +15,15 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 	}
 	t.ExecuteTemplate(w, "base", nil)
 }
+
+func (app *application) mens(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Mens Collection"))
+}
+
+func (app *application) womens(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Womens Collection"))
+}
+
+func (app *application) packsAndGear(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Packs & Gear Collection"))
+}

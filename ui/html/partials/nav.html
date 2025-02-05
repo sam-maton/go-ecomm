@@ -1,29 +1,67 @@
 {{define "navbar"}}
-<h1 class="header__title">
+<h2 class="header__title">
   <a href="/">
     PASSENGER
   </a>
-</h1>
+</h2>
 <nav class="header__menu">
   <ul>
     <li>
-      <a href="/collections/women">Women</a>
+      <details class="header__menu_details">
+        <summary><a class="header__menu_link" href="/collections/women">Women</a></summary>
+        <div>
+          <h3>Womens Menu Items</h3>
+        </div>
+      </details>
     </li>
     <li>
-      <a href="/collections/men">Men</a>
+      <details class="header__menu_details">
+        <summary><a class="header__menu_link" href="/collections/men">Men</a></summary>
+        <div>
+          <h3>Mens Menu Items</h3>
+        </div>
+      </details>
     </li>
     <li>
-      <a href="/collections/packs-gear">Packs & Gear</a>
+      <details class="header__menu_details">
+        <summary><a class="header__menu_link" href="/collections/packs-gear">Packs & Gear</a></summary>
+        <div>
+          <h3>Packs & Gear Menu Items</h3>
+        </div>
+      </details>
     </li>
     <li>
-      <a href="/blog/our-story">Our Story</a>
+      <details class="header__menu_details">
+        <summary><a class="header__menu_link" href="/blog/our-story">Our Story</a></summary>
+        <div>
+          <h3>Our Story Menu Items</h3>
+        </div>
+      </details>
     </li>
     <li>
-      <a href="/collections/outlet">Outlet</a>
+      <details class="header__menu_details">
+        <summary><a class="header__menu_link" href="/collections/outlet">Outlet</a></summary>
+        <div>
+          <h3>Outlet Menu Items</h3>
+        </div>
+      </details>
     </li>
   </ul>
 </nav>
 <div class="header__icons">
-  
+
 </div>
+<script>
+  const detailsElements = document.querySelectorAll('.header__menu_details');
+
+  detailsElements.forEach(details => {
+    details.addEventListener('mouseover', () => {
+      details.open = true;
+    });
+
+    details.addEventListener('mouseout', () => {
+      details.open = false;
+    });
+  });
+</script>
 {{end}}
