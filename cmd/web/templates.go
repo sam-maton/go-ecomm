@@ -39,12 +39,11 @@ func newTemplateCache() (map[string]*template.Template, error) {
 	return cache, nil
 }
 
-func (app *application) render(w http.ResponseWriter, status int, page string) {
+func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string) {
 	ts, ok := app.templateCache[page]
 	if !ok {
 		err := fmt.Errorf("the template %s does not exist", page)
-		app.logger.Error(err.Error())
-		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		app.serverError(w, r, err)
 		return
 	}
 
@@ -52,7 +51,7 @@ func (app *application) render(w http.ResponseWriter, status int, page string) {
 
 	err := ts.ExecuteTemplate(buf, "base", nil)
 	if err != nil {
-		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		app.serverError(w, r, err)
 		return
 	}
 
