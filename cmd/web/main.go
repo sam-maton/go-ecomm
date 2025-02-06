@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"flag"
 	"html/template"
 	"log/slog"
@@ -8,11 +9,13 @@ import (
 	"os"
 
 	_ "github.com/lib/pq"
+	"github.com/sam-maton/go-ecomm/internal/database"
 )
 
 type application struct {
 	logger        *slog.Logger
 	templateCache map[string]*template.Template
+	db            *database.Queries
 }
 
 func main() {
@@ -21,19 +24,31 @@ func main() {
 
 	flag.Parse()
 
+	//SETUP LOGGER
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
 		AddSource: false,
 	}))
 
+	//SETUP TEMPLATE CACHE
 	cache, err := newTemplateCache()
 	if err != nil {
 		logger.Error(err.Error())
 		os.Exit(1)
 	}
 
+	//SETUP DB
+	db, err := openDB(*dsn)
+	if err != nil {
+		logger.Error(err.Error())
+		os.Exit(1)
+	}
+	dbQueries := database.New(db)
+	defer db.Close()
+
 	app := application{
 		logger:        logger,
 		templateCache: cache,
+		db:            dbQueries,
 	}
 
 	server := http.Server{
@@ -49,17 +64,17 @@ func main() {
 	os.Exit(1)
 }
 
-// func openDB(dsn string) (*sql.DB, error) {
-// 	db, err := sql.Open("postgres", dsn)
-// 	if err != nil {
-// 		return nil, err
-// 	}
+func openDB(dsn string) (*sql.DB, error) {
+	db, err := sql.Open("postgres", dsn)
+	if err != nil {
+		return nil, err
+	}
 
-// 	err = db.Ping()
-// 	if err != nil {
-// 		db.Close()
-// 		return nil, err
-// 	}
+	err = db.Ping()
+	if err != nil {
+		db.Close()
+		return nil, err
+	}
 
-// 	return db, nil
-// }
+	return db, nil
+}

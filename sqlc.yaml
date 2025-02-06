@@ -1,8 +1,8 @@
-version: "2"
+version: '2'
 sql:
-  - schema: "sql/schemas"
-    queries: "sql/queries"
-    engine: "postgresql"
+  - schema: 'sql/schemas'
+    queries: 'sql/queries'
+    engine: 'postgresql'
     gen:
       go:
-        out: "internal/models"
+        out: 'internal/database'
