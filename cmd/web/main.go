@@ -6,6 +6,8 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+
+	_ "github.com/lib/pq"
 )
 
 type application struct {
@@ -15,6 +17,7 @@ type application struct {
 
 func main() {
 	addr := flag.String("addr", ":4321", "HTTP network address")
+	dsn := flag.String("dsn", "postgres://Sam.Maton:@localhost:5432/ecomm?sslmode=disable", "Postgres connection string")
 
 	flag.Parse()
 
@@ -45,3 +48,18 @@ func main() {
 	logger.Error(err.Error())
 	os.Exit(1)
 }
+
+// func openDB(dsn string) (*sql.DB, error) {
+// 	db, err := sql.Open("postgres", dsn)
+// 	if err != nil {
+// 		return nil, err
+// 	}
+
+// 	err = db.Ping()
+// 	if err != nil {
+// 		db.Close()
+// 		return nil, err
+// 	}
+
+// 	return db, nil
+// }
