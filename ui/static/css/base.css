@@ -72,6 +72,15 @@ header {
     }
   }
 }
+
+.header__menu-list:hover a {
+  opacity: 0.3;
+}
+
+.header__menu-item:hover a {
+  opacity: 1;
+}
+
 .header__icons {
   flex: 1;
 }
