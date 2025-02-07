@@ -58,9 +58,17 @@ header {
     align-items: center;
 
     li {
-      padding: 0 0.6rem;
+      padding: 0 1rem;
       height: 100%;
       align-content: center;
+    }
+
+    li:first-child {
+      padding-left: 2rem;
+    }
+
+    li:last-child {
+      padding-right: 2rem;
     }
   }
 }
@@ -74,4 +82,8 @@ header {
   width: 100%;
   left: 0;
   top: 101%;
+}
+
+.header__sub-menu-container {
+  padding: 1rem;
 }

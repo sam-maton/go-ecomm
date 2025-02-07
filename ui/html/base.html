@@ -16,9 +16,8 @@
       ></script>
     </head>
     <body>
-      <div class="announcement-bar">
-        <p>Free delivery on £75+ orders</p>
-      </div>
+      {{ block "banner" . }}
+      {{ end }}
       <header>
         {{ template "navbar" . }}
       </header>
