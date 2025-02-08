@@ -5,6 +5,7 @@
 package database
 
 import (
+	"database/sql"
 	"database/sql/driver"
 	"fmt"
 	"time"
@@ -54,13 +55,21 @@ func (ns NullGender) Value() (driver.Value, error) {
 }
 
 type Category struct {
-	ID           int32
-	Gender       Gender
-	MainCategory string
-	SubCategory  string
-	IsActive     bool
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
+	ID          int32
+	Gender      Gender
+	Category    string
+	ProductType string
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+}
+
+type Inventory struct {
+	ID               int32
+	ProductVariantID int32
+	Quantity         int32
+	Size             string
+	CreatedAt        time.Time
+	UpdatedAt        time.Time
 }
 
 type Product struct {
@@ -70,4 +79,16 @@ type Product struct {
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 	CategoryID  int32
+	Price       sql.NullInt32
+	IsActive    bool
+}
+
+type ProductVariant struct {
+	ID            int32
+	ProductID     int32
+	Color         string
+	PriceOverride sql.NullInt32
+	Discount      sql.NullInt32
+	CreatedAt     time.Time
+	UpdatedAt     time.Time
 }

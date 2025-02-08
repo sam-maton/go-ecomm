@@ -13,8 +13,8 @@ func (app *application) routes() http.Handler {
 	mux.Handle("GET /static/", fileServer)
 
 	mux.HandleFunc("/", app.home)
-	mux.HandleFunc("GET /collections/men", app.mens)
-	mux.HandleFunc("GET /collections/women", app.womens)
+	mux.HandleFunc("GET /collections/mens", app.mens)
+	mux.HandleFunc("GET /collections/womens", app.womens)
 	mux.HandleFunc("GET /collections/packs-gear", app.packsAndGear)
 	return mux
 }

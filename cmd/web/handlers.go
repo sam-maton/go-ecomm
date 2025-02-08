@@ -15,7 +15,7 @@ func (app *application) mens(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, r, err)
 	}
 	for _, c := range categories {
-		fmt.Println(c.MainCategory)
+		fmt.Println(c.Category)
 	}
 	app.render(w, r, http.StatusOK, "mens.html")
 }

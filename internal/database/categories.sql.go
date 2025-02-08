@@ -10,7 +10,7 @@ import (
 )
 
 const getCategories = `-- name: GetCategories :many
-SELECT id, gender, main_category, sub_category, is_active, created_at, updated_at FROM categories
+SELECT id, gender, category, product_type, created_at, updated_at FROM categories
 `
 
 func (q *Queries) GetCategories(ctx context.Context) ([]Category, error) {
@@ -25,9 +25,8 @@ func (q *Queries) GetCategories(ctx context.Context) ([]Category, error) {
 		if err := rows.Scan(
 			&i.ID,
 			&i.Gender,
-			&i.MainCategory,
-			&i.SubCategory,
-			&i.IsActive,
+			&i.Category,
+			&i.ProductType,
 			&i.CreatedAt,
 			&i.UpdatedAt,
 		); err != nil {

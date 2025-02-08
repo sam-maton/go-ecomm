@@ -23,24 +23,41 @@
         @mouseout="open = false"
         class="header__menu-item"
       >
-        <a class="header__menu-link" href="/collections/men">Men</a>
+        <a class="header__menu-link" href="/collections/mens">Men</a>
         <div x-show="open" class="header__sub-menu">
           <div class="header__sub-menu-container">
             <div class="header__sub-menu-left">
               <a href="/">Featured</a>
               <ul>
                 <li>
-                  <a href="/collection/mens">Shop All</a>
+                  <a href="/collections/mens">Shop All</a>
                 </li>
                 <li>
-                  <a href="/collections/new-mens"></a>
+                  <!-- Update URL -->
+                  <a href="/collections/mens"></a>
                 </li>
                 <li>
-                  <a href="/collections/mens-best-sellers">Best Sellers</a>
+                  <!-- Update URL -->
+                  <a href="/collections/mens">Best Sellers</a>
                 </li>
               </ul>
             </div>
-            <div class="header__sub-menu-middle"></div>
+            <div class="header__sub-menu-middle">
+              <ul>
+                <li>
+                  <a href="/collections/mens?category=jackets">Jackets</a>
+                </li>
+                <li>
+                  <a href="/collections/mens?active=true">Outdoor Active</a>
+                </li>
+                <li>
+                  <a href="/collections/mens?category=tops">Tops</a>
+                </li>
+                <li>
+                  <a href="/collections/mens?category=bottoms">Bottoms</a>
+                </li>
+              </ul>
+            </div>
             <div class="header__sub-menu-right"></div>
           </div>
         </div>
