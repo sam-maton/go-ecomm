@@ -15,15 +15,18 @@ FROM categories
 INNER JOIN products ON categories.id = products.category_id
 INNER JOIN product_variants ON products.id = product_variants.product_id
 WHERE 
-  (category = $1 OR $1::text IS NULL) AND 
-  (product_type = $2 OR $2::text IS NULL) AND 
-  (gender = $3 OR $3::text IS NULL)
+  (category = $1 OR NOT $2::bool  ) AND 
+  (product_type = $3 OR NOT $4::bool)  AND 
+  (gender = $5 OR NOT $6::bool)
 `
 
 type GetProductVariantsParams struct {
-	Category    string
-	ProductType string
-	Gender      Gender
+	Category       string
+	UseCategory    bool
+	ProductType    string
+	UseProductType bool
+	Gender         Gender
+	UseGender      bool
 }
 
 type GetProductVariantsRow struct {
@@ -32,7 +35,14 @@ type GetProductVariantsRow struct {
 }
 
 func (q *Queries) GetProductVariants(ctx context.Context, arg GetProductVariantsParams) ([]GetProductVariantsRow, error) {
-	rows, err := q.db.QueryContext(ctx, getProductVariants, arg.Category, arg.ProductType, arg.Gender)
+	rows, err := q.db.QueryContext(ctx, getProductVariants,
+		arg.Category,
+		arg.UseCategory,
+		arg.ProductType,
+		arg.UseProductType,
+		arg.Gender,
+		arg.UseGender,
+	)
 	if err != nil {
 		return nil, err
 	}

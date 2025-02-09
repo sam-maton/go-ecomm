@@ -12,16 +12,21 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) mens(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Getting products!")
 	err := r.ParseForm()
 	if err != nil {
 		app.clientError(w, http.StatusBadRequest)
 		return
 	}
 
+	category := r.Form.Get("category")
+	productType := r.Form.Get("product_type")
+
 	variants, err := app.db.GetProductVariants(r.Context(), database.GetProductVariantsParams{
-		Category: "jackets",
-		Gender:   "men",
+		Category:       category,
+		UseCategory:    len(category) > 0,
+		ProductType:    productType,
+		UseProductType: len(productType) > 0,
+		Gender:         "men",
 	})
 
 	if err != nil {

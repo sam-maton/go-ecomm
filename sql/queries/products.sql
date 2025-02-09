@@ -4,6 +4,6 @@ FROM categories
 INNER JOIN products ON categories.id = products.category_id
 INNER JOIN product_variants ON products.id = product_variants.product_id
 WHERE 
-  (category = $1 OR $1::text IS NULL) AND 
-  (product_type = $2 OR $2::text IS NULL) AND 
-  (gender = $3 OR $3::text IS NULL);
+  (category = @category OR NOT @use_category::bool  ) AND 
+  (product_type = @product_type OR NOT @use_product_type::bool)  AND 
+  (gender = @gender OR NOT @use_gender::bool);
