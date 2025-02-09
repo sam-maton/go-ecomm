@@ -10,13 +10,13 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) mens(w http.ResponseWriter, r *http.Request) {
-	categories, err := app.db.GetCategories(r.Context())
+	err := r.ParseForm()
 	if err != nil {
-		app.serverError(w, r, err)
+		app.clientError(w, http.StatusBadRequest)
+		return
 	}
-	for _, c := range categories {
-		fmt.Println(c.Category)
-	}
+
+	fmt.Println(r.Form)
 	app.render(w, r, http.StatusOK, "mens.html")
 }
 
