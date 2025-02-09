@@ -10,11 +10,17 @@ import (
 )
 
 const getCategories = `-- name: GetCategories :many
-SELECT id, gender, category, product_type, created_at, updated_at FROM categories
+SELECT id, gender, category, product_type, created_at, updated_at FROM categories WHERE category = $1 AND product_type = $2 AND gender = $3
 `
 
-func (q *Queries) GetCategories(ctx context.Context) ([]Category, error) {
-	rows, err := q.db.QueryContext(ctx, getCategories)
+type GetCategoriesParams struct {
+	Category    string
+	ProductType string
+	Gender      Gender
+}
+
+func (q *Queries) GetCategories(ctx context.Context, arg GetCategoriesParams) ([]Category, error) {
+	rows, err := q.db.QueryContext(ctx, getCategories, arg.Category, arg.ProductType, arg.Gender)
 	if err != nil {
 		return nil, err
 	}
