@@ -1,5 +1,5 @@
 -- Category seed data
-INSERT INTO categories (gender, main_category, sub_category, created_at, updated_at)
+INSERT INTO categories (gender, category, product_type, created_at, updated_at)
 VALUES 
 ('men', 'tops', 'fleece', NOW(), NOW()),
 ('men', 'tops', 'hoodies', NOW(), NOW()),

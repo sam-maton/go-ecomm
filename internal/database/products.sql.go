@@ -7,10 +7,11 @@ package database
 
 import (
 	"context"
+	"database/sql"
 )
 
 const getProductVariants = `-- name: GetProductVariants :many
-SELECT products.name, product_variants.color
+SELECT categories.gender, categories.category, categories.product_type, products.id AS product_id, products.name, products.description, products.price, product_variants.id AS variant_id, product_variants.color, product_variants.price_override
 FROM categories
 INNER JOIN products ON categories.id = products.category_id
 INNER JOIN product_variants ON products.id = product_variants.product_id
@@ -30,8 +31,16 @@ type GetProductVariantsParams struct {
 }
 
 type GetProductVariantsRow struct {
-	Name  string
-	Color string
+	Gender        Gender
+	Category      string
+	ProductType   string
+	ProductID     int32
+	Name          string
+	Description   string
+	Price         sql.NullInt32
+	VariantID     int32
+	Color         string
+	PriceOverride sql.NullInt32
 }
 
 func (q *Queries) GetProductVariants(ctx context.Context, arg GetProductVariantsParams) ([]GetProductVariantsRow, error) {
@@ -50,7 +59,18 @@ func (q *Queries) GetProductVariants(ctx context.Context, arg GetProductVariants
 	var items []GetProductVariantsRow
 	for rows.Next() {
 		var i GetProductVariantsRow
-		if err := rows.Scan(&i.Name, &i.Color); err != nil {
+		if err := rows.Scan(
+			&i.Gender,
+			&i.Category,
+			&i.ProductType,
+			&i.ProductID,
+			&i.Name,
+			&i.Description,
+			&i.Price,
+			&i.VariantID,
+			&i.Color,
+			&i.PriceOverride,
+		); err != nil {
 			return nil, err
 		}
 		items = append(items, i)

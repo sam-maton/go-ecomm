@@ -8,8 +8,17 @@ import (
 	"net/http"
 	"path/filepath"
 
+	"github.com/sam-maton/go-ecomm/internal/database"
 	"github.com/sam-maton/go-ecomm/ui"
 )
+
+type templateData struct {
+	Products []database.GetProductVariantsRow
+}
+
+func (app *application) newTemplateData(r *http.Request) templateData {
+	return templateData{}
+}
 
 func newTemplateCache() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
@@ -39,7 +48,7 @@ func newTemplateCache() (map[string]*template.Template, error) {
 	return cache, nil
 }
 
-func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string) {
+func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string, data templateData) {
 	ts, ok := app.templateCache[page]
 	if !ok {
 		err := fmt.Errorf("the template %s does not exist", page)
@@ -49,7 +58,7 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, status in
 
 	buf := new(bytes.Buffer)
 
-	err := ts.ExecuteTemplate(buf, "base", nil)
+	err := ts.ExecuteTemplate(buf, "base", data)
 	if err != nil {
 		app.serverError(w, r, err)
 		return

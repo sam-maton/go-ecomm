@@ -1,5 +1,5 @@
 -- name: GetProductVariants :many
-SELECT products.name, product_variants.color
+SELECT categories.gender, categories.category, categories.product_type, products.id AS product_id, products.name, products.description, products.price, product_variants.id AS variant_id, product_variants.color, product_variants.price_override
 FROM categories
 INNER JOIN products ON categories.id = products.category_id
 INNER JOIN product_variants ON products.id = product_variants.product_id

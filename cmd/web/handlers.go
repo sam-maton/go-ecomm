@@ -1,14 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/sam-maton/go-ecomm/internal/database"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	app.render(w, r, http.StatusOK, "home.html")
+	app.render(w, r, http.StatusOK, "home.html", templateData{})
 }
 
 func (app *application) mens(w http.ResponseWriter, r *http.Request) {
@@ -34,14 +33,15 @@ func (app *application) mens(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(variants)
-	app.render(w, r, http.StatusOK, "mens.html")
+	data := app.newTemplateData(r)
+	data.Products = variants
+	app.render(w, r, http.StatusOK, "mens.html", data)
 }
 
 func (app *application) womens(w http.ResponseWriter, r *http.Request) {
-	app.render(w, r, http.StatusOK, "womens.html")
+	app.render(w, r, http.StatusOK, "womens.html", templateData{})
 }
 
 func (app *application) packsAndGear(w http.ResponseWriter, r *http.Request) {
-	app.render(w, r, http.StatusOK, "packs-gear.html")
+	app.render(w, r, http.StatusOK, "packs-gear.html", templateData{})
 }
