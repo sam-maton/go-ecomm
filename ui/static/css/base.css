@@ -25,6 +25,8 @@ a {
   display: block;
 }
 
+/* HEADER STYLES */
+
 .announcement-bar {
   background-color: #006151;
   color: white;
@@ -125,4 +127,21 @@ header {
 
 .header__sub-menu-category {
   font-weight: 700;
+}
+
+/* PRODUCT STYLES */
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.product-card {
+  padding: 1rem;
+}
+
+.product-card img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
 }

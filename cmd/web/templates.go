@@ -4,12 +4,10 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
-	"io/fs"
 	"net/http"
 	"path/filepath"
 
 	"github.com/sam-maton/go-ecomm/internal/database"
-	"github.com/sam-maton/go-ecomm/ui"
 )
 
 type templateData struct {
@@ -23,7 +21,7 @@ func (app *application) newTemplateData(r *http.Request) templateData {
 func newTemplateCache() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
 
-	pages, err := fs.Glob(ui.Files, "html/pages/*.html")
+	pages, err := filepath.Glob("./ui/html/pages/*.html")
 	if err != nil {
 		return nil, err
 	}
@@ -31,13 +29,17 @@ func newTemplateCache() (map[string]*template.Template, error) {
 	for _, page := range pages {
 		name := filepath.Base(page)
 
-		patterns := []string{
-			"html/base.html",
-			"html/partials/*.html",
-			page,
+		ts, err := template.ParseFiles("./ui/html/base.html")
+		if err != nil {
+			return nil, err
 		}
 
-		ts, err := template.New(name).ParseFS(ui.Files, patterns...)
+		ts, err = ts.ParseGlob("./ui/html/partials/*.html")
+		if err != nil {
+			return nil, err
+		}
+
+		ts, err = ts.ParseFiles(page)
 		if err != nil {
 			return nil, err
 		}

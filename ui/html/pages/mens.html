@@ -1,5 +1,18 @@
 {{ define "title" }}Mens Collection{{ end }}
 {{ define "content" }}
-  <h2>Welcome to the mens collection page</h2>
-  <p>This is the mens collection page content</p>
+  <h2>Mens Collection</h2>
+
+  <div class="products-list">
+    {{ range .Products }}
+      <div class="product-card">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0203/9296/files/7xU1h7LZUsJgDdnVxzD1fgadZENY9oWLQrHPbPcqf8.jpg?v=1705507537&width=540"
+          alt=""
+        />
+        <h3>{{ .Name }}</h3>
+        <p>{{ .Price.Int32 }}</p>
+        <p>{{ .Color }}</p>
+      </div>
+    {{ end }}
+  </div>
 {{ end }}
