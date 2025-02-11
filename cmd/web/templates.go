@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"net/http"
 	"path/filepath"
-	"strings"
 
 	"github.com/sam-maton/go-ecomm/internal/database"
 )
@@ -19,12 +18,9 @@ func (app *application) newTemplateData(r *http.Request) templateData {
 	return templateData{}
 }
 
-func splitImageURLs(imageURLs []byte) []string {
-	return strings.Split(string(imageURLs), ", ")
-}
-
 var functions = template.FuncMap{
 	"splitImageURLs": splitImageURLs,
+	"convertToGBP":   convertToGBP,
 }
 
 func newTemplateCache() (map[string]*template.Template, error) {
