@@ -72,6 +72,13 @@ VALUES (1, 'black', NOW(), NOW()),
 (13, 'black', NOW(), NOW()),
 (13, 'white', NOW(), NOW());
 
+-- Product images seed data
+INSERT INTO product_images (product_variant_id, image_url)
+VALUES
+(1, 'https://cdn.shopify.com/s/files/1/0203/9296/files/ugNYuI5VYH0QyK-rgMerPn6by0O0WDXBSkIANtPJ1s0.jpg?v=1729620353&width=540'),
+(1, 'https://cdn.shopify.com/s/files/1/0203/9296/files/85LwfWdruJhjYAU2yxZ94Y1EeaOPoxWfTLQUfNlpBLE.jpg?v=1721210814&width=540'),
+(1, 'https://cdn.shopify.com/s/files/1/0203/9296/files/JJBZefqANr3JiDw_FtgOxLPX-EAhGXm49ITtDn-Sl9E.jpg?v=1729618962&width=540');
+
 -- Inventories seed data
 INSERT INTO inventories (product_variant_id, quantity, size, created_at, updated_at)
 VALUES

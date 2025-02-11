@@ -83,6 +83,13 @@ type Product struct {
 	IsActive    bool
 }
 
+type ProductImage struct {
+	ID               int32
+	ProductVariantID int32
+	ImageUrl         string
+	IsPrimary        sql.NullBool
+}
+
 type ProductVariant struct {
 	ID            int32
 	ProductID     int32

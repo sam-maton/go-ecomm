@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/sam-maton/go-ecomm/internal/database"
@@ -32,6 +33,9 @@ func (app *application) mens(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, r, err)
 		return
 	}
+
+	urls := splitImageURLs(variants[0].Images)
+	fmt.Println(urls)
 
 	data := app.newTemplateData(r)
 	data.Products = variants

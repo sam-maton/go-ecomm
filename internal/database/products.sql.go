@@ -11,14 +11,16 @@ import (
 )
 
 const getProductVariants = `-- name: GetProductVariants :many
-SELECT categories.gender, categories.category, categories.product_type, products.id AS product_id, products.name, products.description, products.price, product_variants.id AS variant_id, product_variants.color, product_variants.price_override
-FROM categories
-INNER JOIN products ON categories.id = products.category_id
-INNER JOIN product_variants ON products.id = product_variants.product_id
+SELECT c.gender, c.category, c.product_type, p.id AS product_id, p.name, p.price, pv.id AS variant_id, pv.color, pv.price_override, string_agg(pi.image_url, ', ') as images
+FROM categories c
+INNER JOIN products p ON c.id = p.category_id
+INNER JOIN product_variants pv ON p.id = pv.product_id
+INNER JOIN product_images pi ON pv.id = pi.product_variant_id
 WHERE 
   (category = $1 OR NOT $2::bool  ) AND 
   (product_type = $3 OR NOT $4::bool)  AND 
   (gender = $5 OR NOT $6::bool)
+GROUP BY p.id, c.id, pv.id
 `
 
 type GetProductVariantsParams struct {
@@ -36,11 +38,11 @@ type GetProductVariantsRow struct {
 	ProductType   string
 	ProductID     int32
 	Name          string
-	Description   string
 	Price         sql.NullInt32
 	VariantID     int32
 	Color         string
 	PriceOverride sql.NullInt32
+	Images        []byte
 }
 
 func (q *Queries) GetProductVariants(ctx context.Context, arg GetProductVariantsParams) ([]GetProductVariantsRow, error) {
@@ -65,11 +67,11 @@ func (q *Queries) GetProductVariants(ctx context.Context, arg GetProductVariants
 			&i.ProductType,
 			&i.ProductID,
 			&i.Name,
-			&i.Description,
 			&i.Price,
 			&i.VariantID,
 			&i.Color,
 			&i.PriceOverride,
+			&i.Images,
 		); err != nil {
 			return nil, err
 		}

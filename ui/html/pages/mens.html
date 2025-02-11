@@ -5,10 +5,9 @@
   <div class="products-list">
     {{ range .Products }}
       <div class="product-card">
-        <img
-          src="https://cdn.shopify.com/s/files/1/0203/9296/files/7xU1h7LZUsJgDdnVxzD1fgadZENY9oWLQrHPbPcqf8.jpg?v=1705507537&width=540"
-          alt=""
-        />
+        {{ range splitImageURLs .Images }}
+          <img src="{{ . }}" alt="" />
+        {{ end }}
         <h3>{{ .Name }}</h3>
         <p>{{ .Price.Int32 }}</p>
         <p>{{ .Color }}</p>
