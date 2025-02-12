@@ -143,5 +143,5 @@ header {
 .product-card img {
   object-fit: cover;
   border-radius: 1rem;
-  width: 540px;
+  max-width: 100%;
 }
