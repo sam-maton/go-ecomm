@@ -27,7 +27,6 @@ func (app *application) mens(w http.ResponseWriter, r *http.Request) {
 		UseProductType: len(productType) > 0,
 		Gender:         "men",
 	})
-
 	if err != nil {
 		app.serverError(w, r, err)
 		return

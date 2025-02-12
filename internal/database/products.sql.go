@@ -11,7 +11,7 @@ import (
 )
 
 const getProductVariants = `-- name: GetProductVariants :many
-SELECT c.gender, c.category, c.product_type, p.id AS product_id, p.name, p.price, pv.id AS variant_id, pv.color, pv.price_override, string_agg(pi.image_url, ', ') as images
+SELECT c.gender, c.category, c.product_type, p.id AS product_id, p.name, p.price, pv.id AS variant_id, pv.color, pv.price_override, pi.image_url
 FROM categories c
 INNER JOIN products p ON c.id = p.category_id
 INNER JOIN product_variants pv ON p.id = pv.product_id
@@ -19,8 +19,9 @@ INNER JOIN product_images pi ON pv.id = pi.product_variant_id
 WHERE 
   (category = $1 OR NOT $2::bool  ) AND 
   (product_type = $3 OR NOT $4::bool)  AND 
-  (gender = $5 OR NOT $6::bool)
-GROUP BY p.id, c.id, pv.id
+  (gender = $5 OR NOT $6::bool) AND
+  (pi.is_primary = FALSE)
+GROUP BY p.id, c.id, pv.id, pi.image_url
 `
 
 type GetProductVariantsParams struct {
@@ -42,7 +43,7 @@ type GetProductVariantsRow struct {
 	VariantID     int32
 	Color         string
 	PriceOverride sql.NullInt32
-	Images        []byte
+	ImageUrl      string
 }
 
 func (q *Queries) GetProductVariants(ctx context.Context, arg GetProductVariantsParams) ([]GetProductVariantsRow, error) {
@@ -71,7 +72,7 @@ func (q *Queries) GetProductVariants(ctx context.Context, arg GetProductVariants
 			&i.VariantID,
 			&i.Color,
 			&i.PriceOverride,
-			&i.Images,
+			&i.ImageUrl,
 		); err != nil {
 			return nil, err
 		}

@@ -5,16 +5,7 @@
   <div class="products-list">
     {{ range .Products }}
       <div class="product-card">
-        <div
-          class="product-carousel"
-          x-data="{
-          currentImage: 1,
-        }"
-        >
-          {{ range splitImageURLs .Images }}
-            <img src="{{ . }}" alt="" />
-          {{ end }}
-        </div>
+        <img src="{{ .ImageUrl }}" alt="" />
         <h3>{{ .Name }}</h3>
         <p>{{ convertToGBP .Price.Int32 }}</p>
         <p style="text-transform: capitalize;">{{ .Color }}</p>

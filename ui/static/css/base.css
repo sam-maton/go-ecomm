@@ -141,16 +141,7 @@ header {
 }
 
 .product-card img {
-  width: 100%;
   object-fit: cover;
   border-radius: 1rem;
-  position: absolute;
-  height: 100%;
-}
-
-.product-carousel {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  min-height: 26rem;
+  width: 540px;
 }
