@@ -15,12 +15,11 @@ SELECT c.gender, c.category, c.product_type, p.id AS product_id, p.name, p.price
 FROM categories c
 INNER JOIN products p ON c.id = p.category_id
 INNER JOIN product_variants pv ON p.id = pv.product_id
-INNER JOIN product_images pi ON pv.id = pi.product_variant_id
+INNER JOIN (SELECT DISTINCT ON (product_variant_id) product_variant_id, image_url  FROM product_images WHERE is_primary = FALSE) pi ON pv.id = pi.product_variant_id
 WHERE 
   (category = $1 OR NOT $2::bool  ) AND 
   (product_type = $3 OR NOT $4::bool)  AND 
-  (gender = $5 OR NOT $6::bool) AND
-  (pi.is_primary = FALSE)
+  (gender = $5 OR NOT $6::bool)
 GROUP BY p.id, c.id, pv.id, pi.image_url
 `
 
